@@ -23,14 +23,13 @@
 | Column            | Type    　　| Options     |
 | --------          | ------  　　| ----------- |
 | user              | references | null: false |
-| image             | string  　　| null: false |
 | name              | string 　 　| null: false |
 | items_description | text   　 　| null: false |
-| category          | string 　 　| null: false |
-| condition         | string 　 　| null: false |
-| shipping_payer    | string  　　| null: false |
-| consignor         | string 　 　| null: false |
-| delivery_time     | integer 　　| null: false |
+| category_id       | integer　 　| null: false |
+| condition_id      | integer　 　| null: false |
+| shipping_payer_id | integer  　　| null: false |
+| consignor_id      | integer　 　| null: false |
+| delivery_time_id  | integer 　　| null: false |
 | price             | integer 　　| null: false |
 
 ### Association
@@ -54,11 +53,11 @@
 | Column       | Type       | Options                        |
 | -------      | ---------- | ------------------------------ |
 | postcode     | string     | null: false                    |
-| prefecture   | string     | null: false                    |
+| prefecture_id| integer    | null: false                    |
 | city         | string     | null: false                    |
 | building_name| string     |                                |
-| phone_number | integer    | null: false                    |
+| phone_number | string    | null: false                    |
 | purchase     | references | null: false, foreign_key: true |
 
 ### Association
- - has_one :purchases
+ - belongs_to :purchases
