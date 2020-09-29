@@ -21,6 +21,11 @@ RSpec.describe User, type: :model do
        @user.valid?
        expect(@user.errors.full_messages).to include("Email can't be blank")
      end
+     it "emailに＠がないと登録できない" do
+      @user.email = "terdsefdr"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
      it "メールアドレスが一意性であること" do
        @user.save
        another_user = FactoryBot.build(:user, email: @user.email)
