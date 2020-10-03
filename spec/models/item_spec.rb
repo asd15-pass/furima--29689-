@@ -72,6 +72,31 @@ RSpec.describe Item, type: :model do
             @item.valid?
             expect(@item.errors.full_messages).to include("Price is not included in the list")
         end
+        it "カテゴリーの選択が「--」の時は保存できない" do
+          @item.category_id= 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Category must be other than 1")
+        end
+        it "商品状態の選択が「--」の時は保存できない" do
+          @item.condition_id= 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Condition must be other than 1")
+        end
+        it "送料支払の選択が「--」の時は保存できない" do
+          @item.shipping_payer_id= 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Shipping payer must be other than 1")
+        end
+        it "都道府県の選択が「--」の時は保存できない" do
+          @item.consignor_id= 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Consignor must be other than 1")
+        end
+        it "配達日数の選択が「--」の時は保存できない" do
+          @item.derivery_time_id= 1
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Derivery time must be other than 1")
+        end
       end
   end
 end

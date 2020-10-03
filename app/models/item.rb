@@ -18,7 +18,8 @@ class Item < ApplicationRecord
   end
   with_options format: {with:/\A[-]?[0-9]+(\.[0-9]+)?\z/}   do
     validates :price    
-   end       
+  end       
   validates_inclusion_of :price,in: (300..9999999)
+  validates :category_id,:condition_id,:shipping_payer_id,:consignor_id,:derivery_time_id, numericality: { other_than: 1 } 
   
 end
