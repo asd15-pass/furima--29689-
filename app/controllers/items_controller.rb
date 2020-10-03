@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
   end
   def new
     @item = Item.new
@@ -13,7 +12,6 @@ class ItemsController < ApplicationController
       return redirect_to root_path
     end
       render :new
-
   end
 
  private

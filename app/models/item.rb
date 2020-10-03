@@ -3,8 +3,6 @@ class Item < ApplicationRecord
   VALID_PASSWORD_REGEX =/\A[-]?[0-9]+(\.[0-9]+)?\z/
   belongs_to_active_hash :category
   belongs_to :user    
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_one :purchase
   has_one_attached :image
   with_options presence: true do
@@ -18,7 +16,6 @@ class Item < ApplicationRecord
     validates :image
     validates :price
   end
-  # validates :price,presence: true,numericality:{in: (300..9999999)}
   with_options format: {with:/\A[-]?[0-9]+(\.[0-9]+)?\z/}   do
     validates :price    
    end       
