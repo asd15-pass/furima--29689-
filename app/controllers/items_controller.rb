@@ -17,13 +17,9 @@ class ItemsController < ApplicationController
     end
       render :new
   end
-  def show
-  end
-  def edit
-  end
-  def update
-    @item.update(item_params)
 
+  def update
+  
     if @item.update(item_params)
       redirect_to root_path
     else
