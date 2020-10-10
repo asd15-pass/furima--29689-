@@ -5,7 +5,7 @@ class User < ApplicationRecord
  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          has_many :items
-         has_many :purchases
+         has_many :orders
          validates :email, uniqueness: { case_sensitive: true }
          validates :password, length:{ minimum: 6 },format: { with: VALID_PASSWORD_REGEX,
           message: "が半角英数字混合である必要がある"}
