@@ -60,3 +60,5 @@ gem 'rspec-rails', '~> 4.0.0'
 gem 'pry-rails'
 gem 'active_hash'
 gem "payjp"
+gem "faker"
+gem "rails-i18n"
