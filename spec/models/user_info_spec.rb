@@ -13,7 +13,8 @@ RSpec.describe UserInfo, type: :model do
         it ":user_id, :item_id ,:postcode,:consignor_id,:phone_number,:city,:building_name,:token,:consignor_codeが当てはまる時" do
           expect(@user_info).to be_valid
         end
-        it ":user_id, :item_id ,:postcode,:consignor_id,:phone_number,:city,:token,:consignor_codeが当てはまる時" do
+        it "building_nameがなくても購入できる" do
+          @user_info.building_name  = ""
           expect(@user_info).to be_valid
         end
       end
@@ -33,8 +34,13 @@ RSpec.describe UserInfo, type: :model do
         @user_info.valid?
         expect(@user_info.errors.full_messages).to include("Phone number can't be blank")
       end
-      it "電話番号にはハイフンは不要で、11桁以内であること" do
-        @user_info.phone_number = "1234567890077"
+      it "電話番号にはハイフンは不要であること" do
+        @user_info.phone_number = "123−2345−2345"
+        @user_info.valid?
+        expect(@user_info.errors.full_messages).to include("Phone number 11桁以内であること")
+      end
+      it "電話番号は11桁以内であること" do
+        @user_info.phone_number = "22222666666222222"
         @user_info.valid?
         expect(@user_info.errors.full_messages).to include("Phone number 11桁以内であること")
       end
