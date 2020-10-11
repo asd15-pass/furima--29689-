@@ -13,6 +13,9 @@ RSpec.describe UserInfo, type: :model do
         it ":user_id, :item_id ,:postcode,:consignor_id,:phone_number,:city,:building_name,:token,:consignor_codeが当てはまる時" do
           expect(@user_info).to be_valid
         end
+        it ":user_id, :item_id ,:postcode,:consignor_id,:phone_number,:city,:token,:consignor_codeが当てはまる時" do
+          expect(@user_info).to be_valid
+        end
       end
     context '購入できない時' do
       it "配送先の情報として、郵便番号が（123-4567となる）必須であること " do
@@ -20,10 +23,20 @@ RSpec.describe UserInfo, type: :model do
         @user_info.valid?
         expect(@user_info.errors.full_messages).to include("Postcode can't be blank", "Postcode にはハイフンが必要であること")
       end
+      it "郵便番号にはハイフンが必要であること（123-4567となる）" do
+        @user_info.postcode  = "1234567"
+        @user_info.valid?
+        expect(@user_info.errors.full_messages).to include("Postcode にはハイフンが必要であること")
+      end
       it "配送先の情報として、電話番号が必須であること" do
         @user_info.phone_number = ""
         @user_info.valid?
         expect(@user_info.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it "電話番号にはハイフンは不要で、11桁以内であること" do
+        @user_info.phone_number = "1234567890077"
+        @user_info.valid?
+        expect(@user_info.errors.full_messages).to include("Phone number 11桁以内であること")
       end
       it "配送先の情報として、都道府県が必須であること" do
         @user_info.consignor_id    = ""
@@ -48,4 +61,6 @@ RSpec.describe UserInfo, type: :model do
     end
   end
 end
+
+
 
