@@ -12,6 +12,5 @@ before_action :basic_auth
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname,:email,:password,:last_name,:first_name,:last_name_kana,:first_name_kana,:birth_date])
   end
-  
 end
 
