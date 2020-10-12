@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_item ,only:[:index,:create]
+  before_action :set_item ,only:[:index,:create,:order]
   before_action :authenticate_user!
   before_action :top
   def index
@@ -9,13 +9,21 @@ class OrdersController < ApplicationController
   def create
     @order = UserInfo.new(order_params)
     if @order.valid?
+      order
       @order.save
       return redirect_to root_path
     else
       render 'index'
     end
   end
-
+  def order
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
+    Payjp::Charge.create(
+      amount: @item.price, # 商品の値段
+      card: order_params[:token] ,
+      currency: 'jpy' # 通貨の種類（日本円）
+      )
+  end
   private
 
   def order_params
