@@ -62,3 +62,6 @@ gem 'active_hash'
 gem "payjp"
 gem "faker"
 gem "rails-i18n"
+group :production do
+  gem 'rails_12factor'
+end
