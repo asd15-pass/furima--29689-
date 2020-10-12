@@ -5,7 +5,7 @@ RSpec.describe UserInfo, type: :model do
       @seller = FactoryBot.create(:user)
       @buyer = FactoryBot.create(:user)
       @item  = FactoryBot.create(:item, user_id: @seller.id)
-      @user_info = FactoryBot.build(:user_info)
+      @user_info = FactoryBot.build(:user_info, user_id:@buyer.id,item_id:@item.id)
       sleep(1)
     end
   describe '商品購入機能' do
@@ -48,6 +48,11 @@ RSpec.describe UserInfo, type: :model do
         @user_info.consignor_id    = ""
         @user_info.valid?
         expect(@user_info.errors.full_messages).to include("Consignor can't be blank")
+      end
+      it "配送先の情報として、都道府県が未選択以外であること" do
+        @user_info.consignor_id    = "---"
+        @user_info.valid?
+        expect(@user_info.errors.full_messages).to include("Consignor is not a number")
       end
       it "配送先の情報として、市区町村が必須であること" do
         @user_info.city    = ""
