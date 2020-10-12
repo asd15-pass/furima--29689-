@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
       render 'index'
     end
   end
+  private
   def order
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
     Payjp::Charge.create(
@@ -24,8 +25,7 @@ class OrdersController < ApplicationController
       currency: 'jpy' # 通貨の種類（日本円）
       )
   end
-  private
-
+  
   def order_params
     params.permit(:item_id,:postcode,:consignor_id,:phone_number, :city, :building_name,:consignor_code,:token).merge(user_id: current_user.id)
   end
