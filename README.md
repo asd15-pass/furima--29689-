@@ -46,9 +46,9 @@
 ### Association
 
 - has_one :items
-- has_one :address
+- has_one :adress
 
-## address テーブル
+## adress テーブル
 
 | Column       | Type       | Options                        |
 | -------      | ---------- | ------------------------------ |
