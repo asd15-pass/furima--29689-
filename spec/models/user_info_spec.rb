@@ -50,9 +50,9 @@ RSpec.describe UserInfo, type: :model do
         expect(@user_info.errors.full_messages).to include("Consignor can't be blank")
       end
       it "配送先の情報として、都道府県が未選択以外であること" do
-        @user_info.consignor_id    = "---"
+        @user_info.consignor_id    = 1
         @user_info.valid?
-        expect(@user_info.errors.full_messages).to include("Consignor is not a number")
+        expect(@user_info.errors.full_messages).to include("Consignor must be other than 1")
       end
       it "配送先の情報として、市区町村が必須であること" do
         @user_info.city    = ""
