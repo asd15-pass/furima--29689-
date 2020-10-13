@@ -10,18 +10,19 @@ class ItemsController < ApplicationController
   end
   def create
     @item = Item.new(item_params)
-    
     if @item.valid?
       @item.save
       return redirect_to root_path
+    else
+      render :new
     end
   end
-  # def destroy
-  #   if user_signed_in? && current_user.id == @item.user_id
-  #     @item.destroy 
-  #     return redirect_to root_path
-  #   end
-  # end
+  def destroy
+    if current_user.id == @item.user_id
+      @item.destroy 
+      return redirect_to root_path
+    end
+  end
 
   def update
   
